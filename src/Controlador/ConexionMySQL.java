@@ -15,7 +15,7 @@ import Modelo.Usuario;
 public class ConexionMySQL {
     
     private static final String CONTROLADOR = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3307/derrap?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3307/derrap";
     private static final String USUARIO = "root";
     private static final String PASS = "admin";
     
