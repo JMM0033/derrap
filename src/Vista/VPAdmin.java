@@ -6,9 +6,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -18,14 +21,18 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 import Controlador.*;
+import Modelo.Cliente;
 import Modelo.Usuario;
 
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import java.awt.CardLayout;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class VPAdmin extends JFrame {
 
@@ -43,6 +50,9 @@ public class VPAdmin extends JFrame {
 	JLabel lblClientes;
 	JLabel lblVehiculos;
 	JLabel lblGestion;
+    DefaultTableModel dtm;
+	private JTable table;
+	private JTable table_1;
 
 	/**
 	 * Create the frame.
@@ -113,6 +123,45 @@ public class VPAdmin extends JFrame {
 
 		panel_1.setBackground(new Color(124, 149, 165));
 		contenedorClientes.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(124, 149, 165));
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setBounds(10, 5, 980, 532);
+		panel_1.add(scrollPane);
+		
+		int crearTabla = conexion.contarUsuarios();
+		//ACABAR
+		Object array [] [] = new Object [crearTabla][9];
+		Cliente clientes [] = conexion.obtenerClientes();
+		System.out.println(crearTabla);
+		for (int i = 0; i<crearTabla;i++) {
+			array[i][0]=clientes[i].getNombre();
+			array[i][1]=clientes[i].getApellidos();
+			array[i][2]=clientes[i].getDni();
+			array[i][3]=clientes[i].getNombre();
+			array[i][4]=clientes[i].getNombre();
+			array[i][5]=clientes[i].getNombre();
+			array[i][6]=clientes[i].getNombre();
+			array[i][7]=clientes[i].getNombre();
+			array[i][8]= new JButton();
+		}
+		
+		
+		table_1 = new JTable();
+		table_1.setBorder(null);
+		table_1.setBackground(new Color(90, 126, 143));
+		table_1.setShowHorizontalLines(false);
+		table_1.setShowGrid(false);
+		scrollPane.setViewportView(table_1);
+		table_1.setModel(new DefaultTableModel(
+			array,
+			new String[] {
+				"Nombre", "Apellidos", "DNI", "Tel\u00E9fono", "Correo Electr\u00F3nico", "Direcci\u00F3n", "Ver Citas", "Ver Coche", "Editar Cliente"
+			}
+		));
 		
 		JLabel lblNewLabel = new JLabel("Clientes");
 		lblNewLabel.setForeground(new Color(234, 234, 234));
@@ -216,12 +265,14 @@ public class VPAdmin extends JFrame {
 					panel_1_1_1.setBounds(27, 59, 1000, 547);
 					contenedorVehiculos.add(panel_1_1_1);
 					
+					
 					JLabel lblVehiculos_1 = new JLabel("Vehiculos");
 					lblVehiculos_1.setForeground(new Color(234, 234, 234));
 					lblVehiculos_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 					lblVehiculos_1.setBounds(10, 10, 235, 22);
 					contenedorVehiculos.add(lblVehiculos_1);
 					
+	
 
 		
 		JPanel panelMenu = new JPanel();

@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Modelo.Cliente;
 import Modelo.Usuario;
 
 public class ConexionMySQL {
@@ -44,7 +45,6 @@ public class ConexionMySQL {
                     		resultado.getString("email"),resultado.getString("pass"),resultado.getInt("estado"),resultado.getInt("rol"));
                 }
                 stm.close();
-                cn.close();
                 return user;
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
@@ -54,6 +54,54 @@ public class ConexionMySQL {
             
             
     }
+    
+    public int contarUsuarios() {
+    	int res = 0;
+    	try {
+            stm = cn.createStatement();
+            resultado = stm.executeQuery("SELECT count(*) FROM cliente");
+            resultado.next();
+            res = resultado.getInt(1);
+            stm.close();
+            return res;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	
+    	return res;
+    	
+    }
+    
+ 
+    
+    public Cliente[] obtenerClientes() {
+    	int numClientes = this.contarUsuarios();
+    	int contador = 0;
+    	Cliente [] clientes = new Cliente[numClientes];
+    	Cliente cliente;
+    	try {
+            stm = cn.createStatement();
+            resultado = stm.executeQuery("SELECT * FROM cliente");
+            while (resultado.next()) {
+                cliente = new Cliente(resultado.getInt("id"),resultado.getString("nombre"),resultado.getString("apellido"),resultado.getString("dni"),resultado.getString("telefono"),
+                		resultado.getString("email"),resultado.getString("direccion"));
+                clientes[contador]=cliente;
+                contador++;
+                
+            }
+            stm.close();
+            return clientes;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	return clientes;
+			
+		}
+    	
+    
+
     
   
         
