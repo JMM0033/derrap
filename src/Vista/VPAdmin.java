@@ -13,7 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -53,6 +57,9 @@ public class VPAdmin extends JFrame {
     DefaultTableModel dtm;
 	private JTable table;
 	private JTable table_1;
+	JPanel panel_1_1;
+	JPanel panel_1;
+	RoundedPanel btnEditarCliente;
 
 	/**
 	 * Create the frame.
@@ -111,57 +118,59 @@ public class VPAdmin extends JFrame {
 		cardPanel.add(contenedorUsuarios, "pagUsuarios");
 		contenedorUsuarios.setLayout(null);
 		
-		JPanel panel_1_1 = new JPanel();
+		panel_1_1 = new JPanel();
 		panel_1_1.setBackground(new Color(124, 149, 165));
 		panel_1_1.setBounds(27, 59, 1000, 547);
 		contenedorUsuarios.add(panel_1_1);
 		
 		
 		
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBounds(27, 59, 1000, 547);
 
 		panel_1.setBackground(new Color(124, 149, 165));
 		contenedorClientes.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBackground(new Color(124, 149, 165));
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.getViewport().setOpaque(false);
-		scrollPane.setBounds(10, 5, 980, 532);
-		panel_1.add(scrollPane);
+
 		
-		int crearTabla = conexion.contarUsuarios();
-		//ACABAR
-		Object array [] [] = new Object [crearTabla][9];
-		Cliente clientes [] = conexion.obtenerClientes();
-		System.out.println(crearTabla);
-		for (int i = 0; i<crearTabla;i++) {
-			array[i][0]=clientes[i].getNombre();
-			array[i][1]=clientes[i].getApellidos();
-			array[i][2]=clientes[i].getDni();
-			array[i][3]=clientes[i].getNombre();
-			array[i][4]=clientes[i].getNombre();
-			array[i][5]=clientes[i].getNombre();
-			array[i][6]=clientes[i].getNombre();
-			array[i][7]=clientes[i].getNombre();
-			array[i][8]= new JButton();
-		}
+		btnEditarCliente = new RoundedPanel(15, new Color(76, 87, 92));
+		btnEditarCliente.setOpaque(false);
+		btnEditarCliente.setVisible(false);
+		btnEditarCliente.setBounds(711, 19, 138, 30);
+		contenedorClientes.add(btnEditarCliente);
+		btnEditarCliente.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		btnEditarCliente.setEnabled(false);
 		
+		JLabel lblEditarCliente = new JLabel("Editar Cliente");
+		lblEditarCliente.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEditarCliente.setForeground(new Color(220, 220, 220));
+		lblEditarCliente.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnEditarCliente.add(lblEditarCliente);
+		JTable tabla = crearTabla();
 		
-		table_1 = new JTable();
-		table_1.setBorder(null);
-		table_1.setBackground(new Color(90, 126, 143));
-		table_1.setShowHorizontalLines(false);
-		table_1.setShowGrid(false);
-		scrollPane.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(
-			array,
-			new String[] {
-				"Nombre", "Apellidos", "DNI", "Tel\u00E9fono", "Correo Electr\u00F3nico", "Direcci\u00F3n", "Ver Citas", "Ver Coche", "Editar Cliente"
-			}
-		));
+		tabla.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int columnaSeleccionada = table_1.getSelectedColumn();
+                    int filaSeleccionada = table_1.getSelectedRow();
+
+                    if (columnaSeleccionada != -1) { // Asegurarse de que se haya seleccionado una columna
+                    	btnEditarCliente.setVisible(true);
+                    	
+                    	if (columnaSeleccionada == 0) {
+    						System.out.println(table_1.getValueAt(filaSeleccionada,columnaSeleccionada));
+							
+						}else if (columnaSeleccionada == 1) {
+    						System.out.println(table_1.getValueAt(filaSeleccionada,columnaSeleccionada));
+						}
+
+                    }
+                }
+            }
+        });
+		
 		
 		JLabel lblNewLabel = new JLabel("Clientes");
 		lblNewLabel.setForeground(new Color(234, 234, 234));
@@ -438,10 +447,46 @@ public class VPAdmin extends JFrame {
 		lblNewLabel_7_1.setForeground(new Color(220, 220, 220));
 		lblNewLabel_7_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnAgregarCliente.add(lblNewLabel_7_1);
+		
+		RoundedPanel btnRecargar = new RoundedPanel(15, new Color(76, 87, 92));
+		btnRecargar.setOpaque(false);
+		btnRecargar.setBounds(608, 19, 63, 30);
+		contenedorClientes.add(btnRecargar);
+		btnRecargar.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblRecargar = new JLabel("Reload");
+		lblRecargar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRecargar.setForeground(new Color(220, 220, 220));
+		lblRecargar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnRecargar.add(lblRecargar);
+		
+
+		
+
 		btnAgregarCliente.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
 				System.out.println("pulsado");
+            }
+			
+			@Override
+			public void mouseEntered (MouseEvent e) {
+				((RoundedPanel) btnAgregarCliente).cambiarColor(colorBotonEntrar);
+				btnAgregarCliente.setBackground(colorBotonEntrar);
+			}
+			
+			@Override
+			public void mouseExited (MouseEvent e) {
+				((RoundedPanel) btnAgregarCliente).cambiarColor(colorBoton);
+				btnAgregarCliente.setBackground(colorBoton);
+				
+			}
+		});
+		
+		btnAgregarCliente.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseClicked(MouseEvent e) {
+				crearTabla();
             }
 			
 			@Override
@@ -512,6 +557,52 @@ public class VPAdmin extends JFrame {
         });
 	}
 	
+	private JTable crearTabla() {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBackground(new Color(124, 149, 165));
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setBounds(10, 5, 980, 532);
+		panel_1.add(scrollPane);
+		int crearTabla = conexion.contarUsuarios();
+		Object array [] [] = new Object [crearTabla][9];
+		Cliente clientes [] = conexion.obtenerClientes();
+		System.out.println(crearTabla);
+		for (int i = 0; i<crearTabla;i++) {
+			array[i][0]=clientes[i].getNombre();
+			array[i][1]=clientes[i].getApellidos();
+			array[i][2]=clientes[i].getDni();
+			array[i][3]=clientes[i].getTelefono();
+			array[i][4]=clientes[i].getCorreo();
+			array[i][5]=clientes[i].getDireccion();
+		}
+		
+		
+		table_1 = new JTable();
+		table_1.setForeground(new Color(234, 234, 234));
+		table_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		table_1.setBorder(null);
+		table_1.setBackground(new Color(90, 126, 143));
+		table_1.setShowHorizontalLines(false);
+		table_1.setShowGrid(false);
+		scrollPane.setViewportView(table_1);
+	    table_1.getTableHeader().setReorderingAllowed(false);
+		table_1.setModel(new DefaultTableModel(
+			array,
+			new String[] {
+				"Nombre", "Apellidos", "DNI", "Tel\u00E9fono", "Correo Electr\u00F3nico", "Direcci\u00F3n"
+			}
+		){
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+		});
+		
+		 return table_1;
+		
+	}
+
 	public void colorMenu(){
 		lblInicio.setBackground(new Color(146, 171, 186));
 		lblClientes.setBackground(new Color(146, 171, 186));
