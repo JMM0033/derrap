@@ -28,6 +28,7 @@ import Modelo.Usuario;
 
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import java.awt.CardLayout;
 
 public class VPMecanico extends JFrame {
 
@@ -50,6 +51,11 @@ public class VPMecanico extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel cardPanel = new JPanel();
+		cardPanel.setBounds(214, 50, 1052, 633);
+		contentPane.add(cardPanel);
+		cardPanel.setLayout(new CardLayout(0, 0));
+		
 		JPanel panelMenu = new JPanel();
 		panelMenu.setBounds(0, 0, 214, 683);
 		panelMenu.setBackground(new Color(140, 164, 179));
@@ -57,7 +63,7 @@ public class VPMecanico extends JFrame {
 		panelMenu.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Inicio");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblNewLabel.setBackground(new Color(146, 171, 186));
 		lblNewLabel.setBounds(0, 129, 214, 45);
 		lblNewLabel.setBorder(new EmptyBorder(0, 20, 0, 0));
@@ -66,7 +72,7 @@ public class VPMecanico extends JFrame {
 		
 
 		JLabel lblNewLabel2 = new JLabel("Órdenes de Trabajo");
-		lblNewLabel2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel2.setBackground(new Color(146, 171, 186));
 		lblNewLabel2.setBounds(0, 184, 214, 45);
 		lblNewLabel2.setBorder(new EmptyBorder(0, 20, 0, 0));
@@ -138,7 +144,7 @@ public class VPMecanico extends JFrame {
 		panelMenuSup.add(lblNewLabel_6);
 		
 		Color colorBoton=new Color(140, 174, 145);
-		JPanel panel = new RoundedPanel(15,colorBoton);
+		JPanel panel = new RoundedPanel(15, new Color(76, 87, 92));
 		panel.setOpaque(false);
 		panel.setBounds(840, 10, 116, 30);
 		panelMenuSup.add(panel);
@@ -155,6 +161,7 @@ public class VPMecanico extends JFrame {
 		});
 		
 		JLabel lblNewLabel_7 = new JLabel("Cerrar Sesión");
+		lblNewLabel_7.setForeground(new Color(220, 220, 220));
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.BOLD, 12));
 		panel.add(lblNewLabel_7);
@@ -162,8 +169,8 @@ public class VPMecanico extends JFrame {
 		JPanel ContenedorPrincipal = new JPanel();
 		ContenedorPrincipal.setBounds(214, 50, 1052, 633);
 		ContenedorPrincipal.setBackground(new Color(163, 188, 204));
-		contentPane.add(ContenedorPrincipal);
 		ContenedorPrincipal.setLayout(null);
+		cardPanel.add(ContenedorPrincipal, "contenedorPrincipal");
 		
 		JLabel lblNewLabel_1 = new JLabel("Buenos Días,");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -240,5 +247,458 @@ public class VPMecanico extends JFrame {
 		lblSolicitarPiezas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblSolicitarPiezas.setBounds(632, 398, 169, 180);
 		ContenedorPrincipal.add(lblSolicitarPiezas);
+		
+		JPanel ordenesTrabajo = new JPanel();
+		ordenesTrabajo.setBackground(new Color(90, 126, 143));
+		ordenesTrabajo.setBounds(214, 50, 1052, 633);
+		cardPanel.add(ordenesTrabajo, "ordenesTrabajo");
+		ordenesTrabajo.setLayout(null);
+		
+		JPanel orden1 = new JPanel();
+		orden1.setBackground(new Color(140, 164, 179));
+		orden1.setBounds(27, 59, 1000, 153);
+		ordenesTrabajo.add(orden1);
+		orden1.setLayout(null);
+		
+		JLabel lblNewLabel_9 = new JLabel("Matrícula");
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_9.setBounds(32, 11, 55, 14);
+		orden1.add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_10 = new JLabel("Fecha Ingreso");
+		lblNewLabel_10.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10.setBounds(120, 11, 80, 14);
+		orden1.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_10_1 = new JLabel("Hora");
+		lblNewLabel_10_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_1.setBounds(227, 11, 46, 14);
+		orden1.add(lblNewLabel_10_1);
+		
+		JLabel lblNewLabel_10_2 = new JLabel("Problema Descrito");
+		lblNewLabel_10_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_2.setBounds(305, 11, 107, 14);
+		orden1.add(lblNewLabel_10_2);
+		
+		JLabel lblNewLabel_10_3 = new JLabel("Servicio");
+		lblNewLabel_10_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_3.setBounds(453, 11, 46, 14);
+		orden1.add(lblNewLabel_10_3);
+		
+		JLabel lblNewLabel_10_4 = new JLabel("Estado");
+		lblNewLabel_10_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_4.setBounds(551, 11, 46, 14);
+		orden1.add(lblNewLabel_10_4);
+		
+		JLabel lblNewLabel_10_5 = new JLabel("Piezas");
+		lblNewLabel_10_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_5.setBounds(645, 11, 46, 14);
+		orden1.add(lblNewLabel_10_5);
+		
+		JLabel lblNewLabel_10_6 = new JLabel("Informacion Cliente");
+		lblNewLabel_10_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_6.setBounds(731, 11, 115, 14);
+		orden1.add(lblNewLabel_10_6);
+		
+		JLabel lblNewLabel_10_7 = new JLabel("Hist. Vehiculo");
+		lblNewLabel_10_7.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_7.setBounds(873, 11, 75, 14);
+		orden1.add(lblNewLabel_10_7);
+		
+		JLabel lblNewLabel_9_1 = new JLabel("1234 ABC");
+		lblNewLabel_9_1.setBounds(32, 28, 50, 14);
+		orden1.add(lblNewLabel_9_1);
+		
+		JLabel lblNewLabel_9_1_1 = new JLabel("08/10/2025");
+		lblNewLabel_9_1_1.setBounds(125, 28, 64, 14);
+		orden1.add(lblNewLabel_9_1_1);
+		
+		JLabel lblNewLabel_9_1_2 = new JLabel("12:00");
+		lblNewLabel_9_1_2.setBounds(226, 28, 36, 14);
+		orden1.add(lblNewLabel_9_1_2);
+		
+		JLabel lblNewLabel_9_1_1_1 = new JLabel("Problemas");
+		lblNewLabel_9_1_1_1.setBounds(306, 28, 84, 14);
+		orden1.add(lblNewLabel_9_1_1_1);
+		
+		JLabel lblNewLabel_9_1_1_2 = new JLabel("Mecánica");
+		lblNewLabel_9_1_1_2.setBounds(454, 28, 50, 14);
+		orden1.add(lblNewLabel_9_1_1_2);
+		
+		RoundedPanel panel_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1.setOpaque(false);
+		panel_1.setBounds(768, 28, 46, 28);
+		orden1.add(panel_1);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1 = new JLabel("VER");
+		lblNewLabel_7_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1.add(lblNewLabel_7_1);
+		
+		RoundedPanel panel_1_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_1.setOpaque(false);
+		panel_1_1.setBounds(885, 28, 46, 28);
+		orden1.add(panel_1_1);
+		panel_1_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_1 = new JLabel("VER");
+		lblNewLabel_7_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_1.add(lblNewLabel_7_1_1);
+		
+		RoundedPanel panel_1_2 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_2.setOpaque(false);
+		panel_1_2.setBounds(640, 28, 46, 28);
+		orden1.add(panel_1_2);
+		panel_1_2.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_2 = new JLabel("VER");
+		lblNewLabel_7_1_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_2.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_2.add(lblNewLabel_7_1_2);
+		
+		RoundedPanel panel_1_3 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3.setOpaque(false);
+		panel_1_3.setBounds(859, 114, 131, 28);
+		orden1.add(panel_1_3);
+		panel_1_3.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3 = new JLabel("MODIFICAR ORDEN");
+		lblNewLabel_7_1_3.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3.add(lblNewLabel_7_1_3);
+		
+		RoundedPanel panel_1_3_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_1.setOpaque(false);
+		panel_1_3_1.setBounds(715, 114, 131, 28);
+		orden1.add(panel_1_3_1);
+		panel_1_3_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_1 = new JLabel("DESASIGNAR ORDEN");
+		lblNewLabel_7_1_3_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_1.add(lblNewLabel_7_1_3_1);
+		
+		RoundedPanel panel_1_3_2 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_2.setOpaque(false);
+		panel_1_3_2.setBounds(572, 114, 131, 28);
+		orden1.add(panel_1_3_2);
+		panel_1_3_2.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_2 = new JLabel("FINALIZAR ORDEN");
+		lblNewLabel_7_1_3_2.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_2.add(lblNewLabel_7_1_3_2);
+		
+		JPanel orden2= new JPanel();
+		orden2.setBackground(new Color(140, 164, 179));
+		orden2.setBounds(27, 256, 1000, 153);
+		ordenesTrabajo.add(orden2);
+		orden2.setLayout(null);
+		
+		JPanel orden1_1 = new JPanel();
+		orden1_1.setLayout(null);
+		orden1_1.setBackground(new Color(140, 164, 179));
+		orden1_1.setBounds(0, 0, 1000, 153);
+		orden2.add(orden1_1);
+		
+		JLabel lblNewLabel_9_2 = new JLabel("Matrícula");
+		lblNewLabel_9_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_9_2.setBounds(32, 11, 55, 14);
+		orden1_1.add(lblNewLabel_9_2);
+		
+		JLabel lblNewLabel_10_8 = new JLabel("Fecha Ingreso");
+		lblNewLabel_10_8.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_8.setBounds(120, 11, 80, 14);
+		orden1_1.add(lblNewLabel_10_8);
+		
+		JLabel lblNewLabel_10_1_1 = new JLabel("Hora");
+		lblNewLabel_10_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_1_1.setBounds(227, 11, 46, 14);
+		orden1_1.add(lblNewLabel_10_1_1);
+		
+		JLabel lblNewLabel_10_2_1 = new JLabel("Problema Descrito");
+		lblNewLabel_10_2_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_2_1.setBounds(305, 11, 107, 14);
+		orden1_1.add(lblNewLabel_10_2_1);
+		
+		JLabel lblNewLabel_10_3_1 = new JLabel("Servicio");
+		lblNewLabel_10_3_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_3_1.setBounds(453, 11, 46, 14);
+		orden1_1.add(lblNewLabel_10_3_1);
+		
+		JLabel lblNewLabel_10_4_1 = new JLabel("Estado");
+		lblNewLabel_10_4_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_4_1.setBounds(551, 11, 46, 14);
+		orden1_1.add(lblNewLabel_10_4_1);
+		
+		JLabel lblNewLabel_10_5_1 = new JLabel("Piezas");
+		lblNewLabel_10_5_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_5_1.setBounds(645, 11, 46, 14);
+		orden1_1.add(lblNewLabel_10_5_1);
+		
+		JLabel lblNewLabel_10_6_1 = new JLabel("Informacion Cliente");
+		lblNewLabel_10_6_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_6_1.setBounds(731, 11, 115, 14);
+		orden1_1.add(lblNewLabel_10_6_1);
+		
+		JLabel lblNewLabel_10_7_1 = new JLabel("Hist. Vehiculo");
+		lblNewLabel_10_7_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_7_1.setBounds(873, 11, 75, 14);
+		orden1_1.add(lblNewLabel_10_7_1);
+		
+		JLabel lblNewLabel_9_1_3 = new JLabel("1234 ABC");
+		lblNewLabel_9_1_3.setBounds(32, 28, 50, 14);
+		orden1_1.add(lblNewLabel_9_1_3);
+		
+		JLabel lblNewLabel_9_1_1_3 = new JLabel("08/10/2025");
+		lblNewLabel_9_1_1_3.setBounds(125, 28, 64, 14);
+		orden1_1.add(lblNewLabel_9_1_1_3);
+		
+		JLabel lblNewLabel_9_1_2_1 = new JLabel("12:00");
+		lblNewLabel_9_1_2_1.setBounds(226, 28, 36, 14);
+		orden1_1.add(lblNewLabel_9_1_2_1);
+		
+		JLabel lblNewLabel_9_1_1_1_1 = new JLabel("Problemas");
+		lblNewLabel_9_1_1_1_1.setBounds(306, 28, 84, 14);
+		orden1_1.add(lblNewLabel_9_1_1_1_1);
+		
+		JLabel lblNewLabel_9_1_1_2_1 = new JLabel("Mecánica");
+		lblNewLabel_9_1_1_2_1.setBounds(454, 28, 50, 14);
+		orden1_1.add(lblNewLabel_9_1_1_2_1);
+		
+		RoundedPanel panel_1_4 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_4.setOpaque(false);
+		panel_1_4.setBounds(768, 28, 46, 28);
+		orden1_1.add(panel_1_4);
+		panel_1_4.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_4 = new JLabel("VER");
+		lblNewLabel_7_1_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_4.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_4.add(lblNewLabel_7_1_4);
+		
+		RoundedPanel panel_1_1_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_1_1.setOpaque(false);
+		panel_1_1_1.setBounds(885, 28, 46, 28);
+		orden1_1.add(panel_1_1_1);
+		panel_1_1_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_1_1 = new JLabel("VER");
+		lblNewLabel_7_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_1_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_1_1.add(lblNewLabel_7_1_1_1);
+		
+		RoundedPanel panel_1_2_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_2_1.setOpaque(false);
+		panel_1_2_1.setBounds(640, 28, 46, 28);
+		orden1_1.add(panel_1_2_1);
+		panel_1_2_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_2_1 = new JLabel("VER");
+		lblNewLabel_7_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_2_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_2_1.add(lblNewLabel_7_1_2_1);
+		
+		RoundedPanel panel_1_3_3 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_3.setOpaque(false);
+		panel_1_3_3.setBounds(859, 114, 131, 28);
+		orden1_1.add(panel_1_3_3);
+		panel_1_3_3.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_3 = new JLabel("MODIFICAR ORDEN");
+		lblNewLabel_7_1_3_3.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_3.add(lblNewLabel_7_1_3_3);
+		
+		RoundedPanel panel_1_3_1_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_1_1.setOpaque(false);
+		panel_1_3_1_1.setBounds(715, 114, 131, 28);
+		orden1_1.add(panel_1_3_1_1);
+		panel_1_3_1_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_1_1 = new JLabel("DESASIGNAR ORDEN");
+		lblNewLabel_7_1_3_1_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_1_1.add(lblNewLabel_7_1_3_1_1);
+		
+		RoundedPanel panel_1_3_2_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_2_1.setOpaque(false);
+		panel_1_3_2_1.setBounds(572, 114, 131, 28);
+		orden1_1.add(panel_1_3_2_1);
+		panel_1_3_2_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_2_1 = new JLabel("FINALIZAR ORDEN");
+		lblNewLabel_7_1_3_2_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_2_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_2_1.add(lblNewLabel_7_1_3_2_1);
+		
+		JPanel orden1_1_1 = new JPanel();
+		orden1_1_1.setLayout(null);
+		orden1_1_1.setBackground(new Color(140, 164, 179));
+		orden1_1_1.setBounds(27, 453, 1000, 153);
+		ordenesTrabajo.add(orden1_1_1);
+		
+		JLabel lblNewLabel_9_2_1 = new JLabel("Matrícula");
+		lblNewLabel_9_2_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_9_2_1.setBounds(32, 11, 55, 14);
+		orden1_1_1.add(lblNewLabel_9_2_1);
+		
+		JLabel lblNewLabel_10_8_1 = new JLabel("Fecha Ingreso");
+		lblNewLabel_10_8_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_8_1.setBounds(120, 11, 80, 14);
+		orden1_1_1.add(lblNewLabel_10_8_1);
+		
+		JLabel lblNewLabel_10_1_1_1 = new JLabel("Hora");
+		lblNewLabel_10_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_1_1_1.setBounds(227, 11, 46, 14);
+		orden1_1_1.add(lblNewLabel_10_1_1_1);
+		
+		JLabel lblNewLabel_10_2_1_1 = new JLabel("Problema Descrito");
+		lblNewLabel_10_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_2_1_1.setBounds(305, 11, 107, 14);
+		orden1_1_1.add(lblNewLabel_10_2_1_1);
+		
+		JLabel lblNewLabel_10_3_1_1 = new JLabel("Servicio");
+		lblNewLabel_10_3_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_3_1_1.setBounds(453, 11, 46, 14);
+		orden1_1_1.add(lblNewLabel_10_3_1_1);
+		
+		JLabel lblNewLabel_10_4_1_1 = new JLabel("Estado");
+		lblNewLabel_10_4_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_4_1_1.setBounds(551, 11, 46, 14);
+		orden1_1_1.add(lblNewLabel_10_4_1_1);
+		
+		JLabel lblNewLabel_10_5_1_1 = new JLabel("Piezas");
+		lblNewLabel_10_5_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_5_1_1.setBounds(645, 11, 46, 14);
+		orden1_1_1.add(lblNewLabel_10_5_1_1);
+		
+		JLabel lblNewLabel_10_6_1_1 = new JLabel("Informacion Cliente");
+		lblNewLabel_10_6_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_6_1_1.setBounds(731, 11, 115, 14);
+		orden1_1_1.add(lblNewLabel_10_6_1_1);
+		
+		JLabel lblNewLabel_10_7_1_1 = new JLabel("Hist. Vehiculo");
+		lblNewLabel_10_7_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_10_7_1_1.setBounds(873, 11, 75, 14);
+		orden1_1_1.add(lblNewLabel_10_7_1_1);
+		
+		JLabel lblNewLabel_9_1_3_1 = new JLabel("1234 ABC");
+		lblNewLabel_9_1_3_1.setBounds(32, 28, 50, 14);
+		orden1_1_1.add(lblNewLabel_9_1_3_1);
+		
+		JLabel lblNewLabel_9_1_1_3_1 = new JLabel("08/10/2025");
+		lblNewLabel_9_1_1_3_1.setBounds(125, 28, 64, 14);
+		orden1_1_1.add(lblNewLabel_9_1_1_3_1);
+		
+		JLabel lblNewLabel_9_1_2_1_1 = new JLabel("12:00");
+		lblNewLabel_9_1_2_1_1.setBounds(226, 28, 36, 14);
+		orden1_1_1.add(lblNewLabel_9_1_2_1_1);
+		
+		JLabel lblNewLabel_9_1_1_1_1_1 = new JLabel("Problemas");
+		lblNewLabel_9_1_1_1_1_1.setBounds(306, 28, 84, 14);
+		orden1_1_1.add(lblNewLabel_9_1_1_1_1_1);
+		
+		JLabel lblNewLabel_9_1_1_2_1_1 = new JLabel("Mecánica");
+		lblNewLabel_9_1_1_2_1_1.setBounds(454, 28, 50, 14);
+		orden1_1_1.add(lblNewLabel_9_1_1_2_1_1);
+		
+		RoundedPanel panel_1_4_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_4_1.setOpaque(false);
+		panel_1_4_1.setBounds(768, 28, 46, 28);
+		orden1_1_1.add(panel_1_4_1);
+		panel_1_4_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_4_1 = new JLabel("VER");
+		lblNewLabel_7_1_4_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_4_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_4_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_4_1.add(lblNewLabel_7_1_4_1);
+		
+		RoundedPanel panel_1_1_1_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_1_1_1.setOpaque(false);
+		panel_1_1_1_1.setBounds(885, 28, 46, 28);
+		orden1_1_1.add(panel_1_1_1_1);
+		panel_1_1_1_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_1_1_1 = new JLabel("VER");
+		lblNewLabel_7_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_1_1_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_1_1_1.add(lblNewLabel_7_1_1_1_1);
+		
+		RoundedPanel panel_1_2_1_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_2_1_1.setOpaque(false);
+		panel_1_2_1_1.setBounds(640, 28, 46, 28);
+		orden1_1_1.add(panel_1_2_1_1);
+		panel_1_2_1_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_2_1_1 = new JLabel("VER");
+		lblNewLabel_7_1_2_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_7_1_2_1_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_2_1_1.add(lblNewLabel_7_1_2_1_1);
+		
+		RoundedPanel panel_1_3_3_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_3_1.setOpaque(false);
+		panel_1_3_3_1.setBounds(859, 114, 131, 28);
+		orden1_1_1.add(panel_1_3_3_1);
+		panel_1_3_3_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_3_1 = new JLabel("MODIFICAR ORDEN");
+		lblNewLabel_7_1_3_3_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_3_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_3_1.add(lblNewLabel_7_1_3_3_1);
+		
+		RoundedPanel panel_1_3_1_1_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_1_1_1.setOpaque(false);
+		panel_1_3_1_1_1.setBounds(715, 114, 131, 28);
+		orden1_1_1.add(panel_1_3_1_1_1);
+		panel_1_3_1_1_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_1_1_1 = new JLabel("DESASIGNAR ORDEN");
+		lblNewLabel_7_1_3_1_1_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_1_1_1.add(lblNewLabel_7_1_3_1_1_1);
+		
+		RoundedPanel panel_1_3_2_1_1 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_2_1_1.setOpaque(false);
+		panel_1_3_2_1_1.setBounds(572, 114, 131, 28);
+		orden1_1_1.add(panel_1_3_2_1_1);
+		panel_1_3_2_1_1.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_2_1_1 = new JLabel("FINALIZAR ORDEN");
+		lblNewLabel_7_1_3_2_1_1.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_2_1_1.add(lblNewLabel_7_1_3_2_1_1);
+		
+		JLabel lblrdenesDeTrabajo = new JLabel("Órdenes de trabajo");
+		lblrdenesDeTrabajo.setForeground(new Color(234, 234, 234));
+		lblrdenesDeTrabajo.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblrdenesDeTrabajo.setBounds(27, 11, 199, 22);
+		ordenesTrabajo.add(lblrdenesDeTrabajo);
+		
+		RoundedPanel panel_1_3_4 = new RoundedPanel(15, new Color(76, 87, 92));
+		panel_1_3_4.setOpaque(false);
+		panel_1_3_4.setBounds(896, 20, 131, 28);
+		ordenesTrabajo.add(panel_1_3_4);
+		panel_1_3_4.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+		
+		JLabel lblNewLabel_7_1_3_4 = new JLabel("ASIGNAR ORDEN");
+		lblNewLabel_7_1_3_4.setForeground(new Color(220, 220, 220));
+		lblNewLabel_7_1_3_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		panel_1_3_4.add(lblNewLabel_7_1_3_4);
+		
+		
+		
+		
 	}
 }
