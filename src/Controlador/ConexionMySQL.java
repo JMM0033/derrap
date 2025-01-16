@@ -58,11 +58,29 @@ public class ConexionMySQL {
             
     }
     
-    public int contarUsuarios() {
+    public int contarClientes() {
     	int res = 0;
     	try {
             stm = cn.createStatement();
             resultado = stm.executeQuery("SELECT count(*) FROM cliente");
+            resultado.next();
+            res = resultado.getInt(1);
+            stm.close();
+            return res;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	
+    	return res;
+    	
+    }
+    
+    public int contarUsuarios() {
+    	int res = 0;
+    	try {
+            stm = cn.createStatement();
+            resultado = stm.executeQuery("SELECT count(*) FROM usuario WHERE rol = 1");
             resultado.next();
             res = resultado.getInt(1);
             stm.close();
@@ -96,7 +114,7 @@ public class ConexionMySQL {
  
     
     public Cliente[] obtenerClientes() {
-    	int numClientes = this.contarUsuarios();
+    	int numClientes = this.contarClientes();
     	int contador = 0;
     	Cliente [] clientes = new Cliente[numClientes];
     	Cliente cliente;
@@ -117,6 +135,31 @@ public class ConexionMySQL {
             e.printStackTrace();
         }
     	return clientes;
+			
+		}
+    
+    public Usuario[] obtenerUsuarios() {
+    	int numUsuarios = this.contarUsuarios();
+    	int contador = 0;
+    	Usuario [] usuarios = new Usuario[numUsuarios];
+    	Usuario usuario;
+    	try {
+            stm = cn.createStatement();
+            resultado = stm.executeQuery("SELECT * FROM usuario WHERE rol = 1");
+            while (resultado.next()) {
+            	usuario = new Usuario(resultado.getInt("id"),resultado.getString("nombre"),resultado.getString("apellido"),resultado.getString("dni"),resultado.getString("telefono"),
+                		resultado.getString("email"),"",resultado.getInt("estado"),resultado.getInt("rol"));
+            	usuarios[contador]=usuario;
+                contador++;
+                
+            }
+            stm.close();
+            return usuarios;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	return usuarios;
 			
 		}
     

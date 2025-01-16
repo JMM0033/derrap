@@ -45,7 +45,7 @@ public class VPAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Usuario usuario;
+	public Usuario usuario;
 	ConexionMySQL conexion;
 	private JPanel cardPanel = new JPanel();
 	private JPanel contenedorPrincipal = new JPanel();
@@ -55,23 +55,26 @@ public class VPAdmin extends JFrame {
 	JPanel panel,btnAgregarCliente;
 	JLabel lblInicio;
 	JLabel lblClientes;
-	RoundedPanel btnEditarVehiculo;
+	RoundedPanel btnEditarVehiculo,btnRecargar_2;
 	JLabel lblVehiculos;
 	JLabel lblGestion;
     DefaultTableModel dtm;
 	private JTable table_1;
 	private JTable table_2;
+	private JTable table_3;
 	JPanel panel_1_1;
 	JPanel panel_1;
 	RoundedPanel btnEditarCliente;
 	RoundedPanel btnRecargar;
 	private DefaultTableModel tableModel;
 	private DefaultTableModel tableModel2;
+	private DefaultTableModel tableModel3;
 	RoundedPanel btnAgregarVehiculo;
 	RoundedPanel btnVerCliente;
-	int filaSeleccionadaClientes,filaSeleccionadaVehiculos;
+	int filaSeleccionadaClientes,filaSeleccionadaVehiculos,filaSeleccionadaUsuarios;
 	Cliente [] clientes;
 	Vehiculo [] vehiculos;
+	Usuario [] usuarios;
 	RoundedPanel btnEliminarCliente;
 	RoundedPanel btnRecargar_1;
 	RoundedPanel btnEliminarVehiculo;
@@ -139,6 +142,7 @@ public class VPAdmin extends JFrame {
 		panel_1_1.setBackground(new Color(124, 149, 165));
 		panel_1_1.setBounds(27, 59, 1000, 547);
 		contenedorUsuarios.add(panel_1_1);
+		panel_1_1.setLayout(null);
 		
 		
 		
@@ -155,7 +159,7 @@ public class VPAdmin extends JFrame {
 		btnEditarCliente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEditarCliente.setOpaque(false);
 		btnEditarCliente.setVisible(false);
-		btnEditarCliente.setBounds(645, 15, 138, 30);
+		btnEditarCliente.setBounds(635, 15, 148, 30);
 		contenedorClientes.add(btnEditarCliente);
 		btnEditarCliente.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
 		
@@ -169,7 +173,7 @@ public class VPAdmin extends JFrame {
 		btnEliminarCliente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminarCliente.setOpaque(false);
 		btnEliminarCliente.setVisible(false);
-		btnEliminarCliente.setBounds(492, 15, 138, 30);
+		btnEliminarCliente.setBounds(477, 15, 148, 30);
 		contenedorClientes.add(btnEliminarCliente);
 		btnEliminarCliente.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
 		
@@ -189,7 +193,7 @@ public class VPAdmin extends JFrame {
 		btnEliminarVehiculo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEliminarVehiculo.setOpaque(false);
     	btnEliminarVehiculo.setVisible(false);
-		btnEliminarVehiculo.setBounds(507, 15, 138, 30);
+		btnEliminarVehiculo.setBounds(477, 15, 148, 30);
 		contenedorVehiculos.add(btnEliminarVehiculo);
 		btnEliminarVehiculo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
 		
@@ -202,7 +206,7 @@ public class VPAdmin extends JFrame {
 		btnAgregarVehiculo = new RoundedPanel(15, new Color(76, 87, 92));
 		btnAgregarVehiculo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAgregarVehiculo.setOpaque(false);
-		btnAgregarVehiculo.setBounds(803, 15, 138, 30);
+		btnAgregarVehiculo.setBounds(793, 15, 148, 30);
 		contenedorVehiculos.add(btnAgregarVehiculo);
 		btnAgregarVehiculo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
 		
@@ -216,7 +220,7 @@ public class VPAdmin extends JFrame {
 		btnEditarVehiculo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnEditarVehiculo.setOpaque(false);
 		btnEditarVehiculo.setVisible(false);
-		btnEditarVehiculo.setBounds(655, 15, 138, 30);
+		btnEditarVehiculo.setBounds(635, 15, 148, 30);
 		contenedorVehiculos.add(btnEditarVehiculo);
 		btnEditarVehiculo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
 		
@@ -229,7 +233,7 @@ public class VPAdmin extends JFrame {
 		btnVerCliente = new RoundedPanel(15, new Color(76, 87, 92));
 		btnVerCliente.setOpaque(false);
 		btnVerCliente.setVisible(false);
-		btnVerCliente.setBounds(359, 15, 138, 30);
+		btnVerCliente.setBounds(319, 15, 148, 30);
 		contenedorVehiculos.add(btnVerCliente);
 		btnVerCliente.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
 		
@@ -243,6 +247,7 @@ public class VPAdmin extends JFrame {
 		
 		crearTablaClientes();
 		crearTablaVehiculos();
+		crearTablaUsuarios();
 		
 		
 		JLabel lblNewLabel = new JLabel("Clientes");
@@ -363,6 +368,20 @@ public class VPAdmin extends JFrame {
 					lblRecargar_1.setForeground(new Color(220, 220, 220));
 					lblRecargar_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 					btnRecargar_1.add(lblRecargar_1);
+					
+					
+					btnRecargar_2 = new RoundedPanel(15, new Color(76, 87, 92));
+					btnRecargar_2.setOpaque(false);
+					btnRecargar_2.setBounds(951, 15, 76, 30);
+					contenedorUsuarios.add(btnRecargar_2);
+					btnRecargar_2.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
+					btnRecargar_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					
+					JLabel lblRecargar_2 = new JLabel("Recargar");
+					lblRecargar_2.setHorizontalAlignment(SwingConstants.CENTER);
+					lblRecargar_2.setForeground(new Color(220, 220, 220));
+					lblRecargar_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+					btnRecargar_2.add(lblRecargar_2);
 					
 
 					
@@ -532,7 +551,7 @@ public class VPAdmin extends JFrame {
 		
 		btnAgregarCliente = new RoundedPanel(15,colorBoton);
 		btnAgregarCliente.setOpaque(false);
-		btnAgregarCliente.setBounds(798, 15, 138, 30);
+		btnAgregarCliente.setBounds(793, 15, 148, 30);
 		contenedorClientes.add(btnAgregarCliente);
 		btnAgregarCliente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAgregarCliente.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 7));
@@ -714,6 +733,26 @@ public class VPAdmin extends JFrame {
 			}
 		});
 		
+		btnRecargar_2.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseClicked(MouseEvent e) {
+				crearTablaUsuarios();
+            }
+			
+			@Override
+			public void mouseEntered (MouseEvent e) {
+				((RoundedPanel) btnRecargar_2).cambiarColor(colorBotonEntrar);
+				btnRecargar_2.setBackground(colorBotonEntrar);
+			}
+			
+			@Override
+			public void mouseExited (MouseEvent e) {
+				((RoundedPanel) btnRecargar_2).cambiarColor(colorBoton);
+				btnRecargar_2.setBackground(colorBoton);
+				
+			}
+		});
+		
 		btnRecargar_1.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
@@ -890,7 +929,7 @@ public class VPAdmin extends JFrame {
 
 	public void crearTablaClientes() {
 		
-		int crearTabla = conexion.contarUsuarios();
+		int crearTabla = conexion.contarClientes();
 		Object array [] [] = new Object [crearTabla][9];
 		System.out.println(array.length);
 		clientes = conexion.obtenerClientes();
@@ -1051,6 +1090,87 @@ public void crearTablaVehiculos() {
 
 		        
 	}
+
+public void crearTablaUsuarios() {
+	
+	int crearTabla = conexion.contarUsuarios();
+	Object array3 [] [] = new Object [crearTabla][6];
+	usuarios = conexion.obtenerUsuarios();
+	for (int i = 0; i<crearTabla;i++) {
+		array3[i][0]=usuarios[i].getNombre();
+		array3[i][1]=usuarios[i].getApellido();
+		array3[i][2]=usuarios[i].getDni();
+		array3[i][3]=usuarios[i].getTelefono();
+		array3[i][4]=usuarios[i].getEmail();
+	}
+	
+	
+	if (table_3 == null) {
+		JScrollPane scrollPane3 = new JScrollPane();
+		scrollPane3.setBackground(new Color(124, 149, 165));
+		scrollPane3.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane3.getViewport().setOpaque(false);
+		scrollPane3.setBounds(10, 5, 980, 532);
+		panel_1_1.add(scrollPane3);
+		table_3 = new JTable();
+		table_3.setForeground(new Color(234, 234, 234));
+		table_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		table_3.setBorder(null);
+		table_3.setBackground(new Color(90, 126, 143));
+		table_3.setShowHorizontalLines(false);
+		table_3.setShowGrid(false);
+		scrollPane3.setViewportView(table_3);
+		table_3.getTableHeader().setReorderingAllowed(false);
+	    
+		table_3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    filaSeleccionadaUsuarios = table_3.getSelectedRow();
+
+                    if (filaSeleccionadaUsuarios != -1) { // Asegurarse de que se haya seleccionado una columna
+                    	btnEditarVehiculo.setVisible(true);
+                    	btnEliminarVehiculo.setVisible(true);
+                    	btnVerCliente.setVisible(true);
+                    	
+
+                    }
+                }
+            }
+        });
+	}
+
+    String[] columnNames = {
+        "Nombre", "Apellido", "DNI", "Teléfono", "Mail"
+    };
+
+    // Crear un nuevo modelo si no está creado aún
+    tableModel3 = new DefaultTableModel(array3, columnNames) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false; // No permitir la edición de celdas
+        }
+    };
+    tableModel3.setRowCount(0); // Limpiar las filas anteriores
+    for (int i = 0; i < crearTabla; i++) {
+        tableModel3.addRow(array3[i]); // Agregar las nuevas filas
+    }
+
+    table_3.setModel(tableModel3);
+
+    // Refrescar la vista
+    btnEditarVehiculo.setVisible(false);
+	btnEliminarVehiculo.setVisible(false);
+	btnVerCliente.setVisible(false);
+    tableModel3.fireTableDataChanged(); 
+    table_3.revalidate(); 
+    table_3.repaint();  
+    panel_1_1.revalidate();  
+    panel_1_1.repaint();
+    
+
+	        
+}
 
 	public void colorMenu(){
 		lblInicio.setBackground(new Color(146, 171, 186));

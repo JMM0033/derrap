@@ -36,6 +36,8 @@ public class VPMecanico extends JFrame {
 	private JPanel contentPane;
 	private Usuario usuario;
 	private ConexionMySQL conexion;
+	JLabel lblInicio;
+	JLabel lblOrdenes;
 
 	/**
 	 * Create the frame.
@@ -54,7 +56,10 @@ public class VPMecanico extends JFrame {
 		JPanel cardPanel = new JPanel();
 		cardPanel.setBounds(214, 50, 1052, 633);
 		contentPane.add(cardPanel);
-		cardPanel.setLayout(new CardLayout(0, 0));
+		
+		CardLayout cardLayout = new CardLayout();
+		cardPanel.setLayout(cardLayout);
+		
 		
 		JPanel panelMenu = new JPanel();
 		panelMenu.setBounds(0, 0, 214, 683);
@@ -62,23 +67,24 @@ public class VPMecanico extends JFrame {
 		contentPane.add(panelMenu);
 		panelMenu.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Inicio");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setBackground(new Color(146, 171, 186));
-		lblNewLabel.setBounds(0, 129, 214, 45);
-		lblNewLabel.setBorder(new EmptyBorder(0, 20, 0, 0));
-		lblNewLabel.setOpaque(true);
-		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblInicio = new JLabel("Inicio");
+		lblInicio.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblInicio.setBackground(new Color(90, 126, 143));
+		lblInicio.setForeground(new Color(220, 220, 220));
+		lblInicio.setBounds(0, 129, 214, 45);
+		lblInicio.setBorder(new EmptyBorder(0, 20, 0, 0));
+		lblInicio.setOpaque(true);
+		lblInicio.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		
 
-		JLabel lblNewLabel2 = new JLabel("Órdenes de Trabajo");
-		lblNewLabel2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel2.setBackground(new Color(146, 171, 186));
-		lblNewLabel2.setBounds(0, 184, 214, 45);
-		lblNewLabel2.setBorder(new EmptyBorder(0, 20, 0, 0));
-		lblNewLabel2.setOpaque(true);
-		lblNewLabel2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		panelMenu.add(lblNewLabel2);
+		lblOrdenes = new JLabel("Órdenes de Trabajo");
+		lblOrdenes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblOrdenes.setBackground(new Color(146, 171, 186));
+		lblOrdenes.setBounds(0, 184, 214, 45);
+		lblOrdenes.setBorder(new EmptyBorder(0, 20, 0, 0));
+		lblOrdenes.setOpaque(true);
+		lblOrdenes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		panelMenu.add(lblOrdenes);
 		
 
 		JLabel lblVehiculos = new JLabel("Vehículos");
@@ -100,15 +106,32 @@ public class VPMecanico extends JFrame {
 		lblAlmacen.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		panelMenu.add(lblAlmacen);
 		
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("Yay you clicked me");
-            }
 
-        });
 		
-		panelMenu.add(lblNewLabel);
+
+		lblOrdenes.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseClicked(MouseEvent e) {
+				cardLayout.show(cardPanel,"ordenesTrabajo");
+				colorMenu();
+				lblOrdenes.setBackground(new Color(90, 126, 143));
+				lblOrdenes.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblOrdenes.setForeground(new Color(220, 220, 220));
+            }
+		});
+		
+		lblInicio.addMouseListener(new MouseAdapter() {
+			@Override
+            public void mouseClicked(MouseEvent e) {
+				cardLayout.show(cardPanel,"contenedorPrincipal");
+				colorMenu();
+				lblInicio.setBackground(new Color(90, 126, 143));
+				lblInicio.setFont(new Font("Tahoma", Font.BOLD, 12));
+				lblInicio.setForeground(new Color(220, 220, 220));
+            }
+		});
+		
+		panelMenu.add(lblInicio);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -168,31 +191,36 @@ public class VPMecanico extends JFrame {
 		
 		JPanel ContenedorPrincipal = new JPanel();
 		ContenedorPrincipal.setBounds(214, 50, 1052, 633);
-		ContenedorPrincipal.setBackground(new Color(163, 188, 204));
+		ContenedorPrincipal.setBackground(new Color(90, 126, 143));
 		ContenedorPrincipal.setLayout(null);
 		cardPanel.add(ContenedorPrincipal, "contenedorPrincipal");
 		
 		JLabel lblNewLabel_1 = new JLabel("Buenos Días,");
+		lblNewLabel_1.setForeground(new Color(220, 220, 220));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(10, 10, 135, 22);
 		ContenedorPrincipal.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel(usuario.getNombre());
+		lblNewLabel_2.setForeground(new Color(220, 220, 220));
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_2.setBounds(144, 10, 135, 22);
 		ContenedorPrincipal.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Actualmente tienes");
+		lblNewLabel_3.setForeground(new Color(220, 220, 220));
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_3.setBounds(10, 32, 121, 15);
 		ContenedorPrincipal.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("X");
+		lblNewLabel_4.setForeground(new Color(220, 220, 220));
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_4.setBounds(132, 32, 10, 15);
 		ContenedorPrincipal.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("órdenes de Reparacióbn Asignadas");
+		lblNewLabel_5.setForeground(new Color(220, 220, 220));
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_5.setBounds(142, 32, 220, 15);
 		ContenedorPrincipal.add(lblNewLabel_5);
@@ -697,6 +725,20 @@ public class VPMecanico extends JFrame {
 		lblNewLabel_7_1_3_4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel_1_3_4.add(lblNewLabel_7_1_3_4);
 		
+		
+		
+		
+	}
+	
+	public void colorMenu(){
+		lblInicio.setBackground(new Color(146, 171, 186));
+		lblOrdenes.setBackground(new Color(146, 171, 186));
+		
+		lblInicio.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblOrdenes.setFont(new Font("Tahoma", Font.PLAIN, 12));
+
+		lblInicio.setForeground(new Color(0, 0, 0));
+		lblOrdenes.setForeground(new Color(0, 0, 0));
 		
 		
 		

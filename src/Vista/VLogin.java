@@ -3,6 +3,9 @@ package Vista;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -44,6 +47,8 @@ public class VLogin extends JFrame {
 	public ConexionMySQL conexion = new ConexionMySQL();
 	public Connection conect = null;
 	public PreparedStatement stmt = null;
+	private boolean isDialogOpen = false;
+	boolean connected = false;
 
 	/**
 	 * Launch the application.
@@ -110,28 +115,12 @@ public class VLogin extends JFrame {
 		Image newlblLoginButton = lblLoginButtonImage.getScaledInstance(72, 24, Image.SCALE_DEFAULT);
 		lblLoginButton.setIcon(new ImageIcon(newlblLoginButton));
 		lblLoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-       
+
+		
 		lblLoginButton.addMouseListener(new MouseAdapter() {
 			@Override
             public void mouseClicked(MouseEvent e) {
-					conexion.conectar();
-					 usuario = conexion.iniciarSesion(textFieldUsuario.getText(), new String(passwordField.getPassword()));
-					if (usuario == null) {
-						JOptionPane.showMessageDialog(null, "Los datos introducidos son incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
-					} else {
-						if (usuario.getRol()==0) { //Administrador
-							VPAdmin vpAdmin = new VPAdmin(usuario,conexion);
-							vpAdmin.setVisible(true);
-							vpAdmin.setResizable(false);
-							dispose();
-							
-						}else if (usuario.getRol() == 1) { //Mecánico
-							VPMecanico vpMec = new VPMecanico(usuario,conexion);
-							vpMec.setVisible(true);
-							vpMec.setResizable(false);
-							dispose();
-						}
-					}
+				conectar();
             }
 		});
 		
@@ -215,7 +204,50 @@ public class VLogin extends JFrame {
 		panelLogin.add(lblRecAzul);
 		
 		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager()
+		  .addKeyEventDispatcher(new KeyEventDispatcher() {
+		      @Override
+		      public boolean dispatchKeyEvent(KeyEvent e) {
+		            if (isDialogOpen) {
+		                return false;
+		            }
+		            if (!connected) {
+			            if (e.getKeyCode() == KeyEvent.VK_ENTER && e.getID() == KeyEvent.KEY_PRESSED) {
+			                conectar();
+			            }
+						
+					}
+
+		            return false;
+		      }
+		});
 		
+	}
+	
+	public void conectar() {
+		conexion.conectar();
+		 usuario = conexion.iniciarSesion(textFieldUsuario.getText(), new String(passwordField.getPassword()));
+		if (usuario == null) {
+			isDialogOpen = true;
+			JOptionPane.showMessageDialog(null, "Los datos introducidos son incorrectos", "Error", JOptionPane.ERROR_MESSAGE); 
+            isDialogOpen = false;
+		} else {
+			textFieldUsuario.setText("");
+			passwordField.setText("");
+			connected = true;
+			if (usuario.getRol()==0) { //Administrador
+				VPAdmin vpAdmin = new VPAdmin(usuario,conexion);
+				vpAdmin.setVisible(true);
+				vpAdmin.setResizable(false);
+				dispose();
+				
+			}else if (usuario.getRol() == 1) { //Mecánico
+				VPMecanico vpMec = new VPMecanico(usuario,conexion);
+				vpMec.setVisible(true);
+				vpMec.setResizable(false);
+				dispose();
+			}
+		}
 		
 	}
 	
