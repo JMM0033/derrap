@@ -66,7 +66,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Javi/Downloads/Librerias/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Javi/Downloads/Librerias/pdfa-9.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -87,7 +86,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Javi/Downloads/Librerias/slf4j-api-2.0.16.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Javi/Downloads/Librerias/styled-xml-parser-9.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -98,5 +96,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Bichichi/Downloads/ojdbc11.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
